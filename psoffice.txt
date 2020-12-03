@@ -1,3 +1,15 @@
+# apt-get update
+# apt-get install nano
+# which tasksel
+# apt-get install tasksel
+# dpkg --configure -a
+# tasksel --list-tasks
+# sudo tasksel install lamp-server  7Yv3H10W 7Yv3H10W 7Yv3h10W
+# php -v
+# tasksel --list-tasks |grep "lamp-server"
+# sudo apt-get install php-imap
+# sudo phpenmod imap 
+
 # service apache2 restart
 need install php extension
 # sudo apt install openssl php-mysql php-tokenizer php-xml php-json php-common php-bcmath php-zip php-curl php-mbstring php-gettext php*-mcrypt
@@ -12,3 +24,134 @@ USE email;
 update mysql.user set authentication_string=password('uJ13hy8D') where user='root' and Host ='localhost';
 update mysql.user set plugin="mysql_native_password"; 
 flush privileges;
+UPDATE users SET Status =2,pop_limit=1000 WHERE id= 1;
+SELECT * FROM users;
+SELECT * FROM campaign_settings;
+UPDATE campaign_settings SET pre_mes_add =1,pop_by_smtp=1 WHERE id= 1;
+# sudo service apache2 restart
+if login url not working I resolved by doing the following: Check if there is a module called rewrite.load in your apache at:
+
+# cd /etc/apache2/mods-enabled/
+If it does not exist execute the following excerpt:
+
+# 
+Otherwise, change the Apache configuration file to consolidate use of the "friendly URL".
+
+# sudo nano /etc/apache2/apache2.conf
+Find the following code inside the editor:
+
+<Directory /var/www/> 
+   Options Indexes FollowSymLinks
+   AllowOverride None
+   Require all granted
+</Directory> 
+Change to:
+
+<Directory /var/www/> 
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+# sudo a2enmod rewrite
+# sudo service apache2 restart
+
+# cd /var/www/html
+# ls -l
+# rm index.html
+# apt-get install unzip
+now your need upload app.zip file in folder /var/www/html/
+cd /var/www/html
+unzip app.zip
+rm app.zip
+sudo chown -R www-data:www-data /var/www/html/routes
+sudo chown -R www-data:www-data /var/www/html/storage
+sudo chown -R www-data:www-data /var/www/html/bootstrap
+sudo nano /var/www/html/.htaccess
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+# php artisan config:clear
+# php artisan config:cache
+
+now you input databasses and setup
+# php artisan migrate
+# php artisan migrate --path=database/migrations/update
+# php artisan db:seed
+# crontab -e
+* * * * * cd /var/www/html && php artisan schedule:run >> /dev/null 2>&1
+* * * * * cd /var/www/html && php artisan ps:pop >> /dev/null 2>&1
+* * * * * cd /var/www/html && php artisan email:send >> /dev/null 2>&1
+0 0 * * * mysqldump -u'root' -p'uJ13hy8D' --databases email > database_`date +\%Y\%m\%d`.sql
+* * * * * python3 main.py >> /dev/null 2>&1
+sudo service cron restart
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-apache
+sudo certbot --apache -d cashcamp.xyz
+sudo certbot --apache -d example.com -d www.example.com
+https://www.ssllabs.com/ssltest/analyze.html?d=example.com&latest
+
+sudo certbot renew --dry-run
+
+mysqldump -u root -p 'g4YU9giRy' --databases email > database_$(date +%Y%m%d).sql
+mysqldump -u root -p --databases email > database_$(date +%Y%m%d).sql
+# sudo service cron restart
+sudo ufw allow from 27.123.255.0/24 to any port 22
+
+show syslog
+# tail /var/log/syslog
+if not working cronjob
+# tail -f /var/log/syslog | grep cron -i
+$ sudo systemctl enable cron.service
+$ sudo systemctl start cron.service
+sudo systemctl enable cron
+grep -i cron /var/log/syslog
+a2f1a46d-4bbd-466f-8575-5391e0559b70
+
+sudo swapon --show
+free -h
+df -h
+sudo fallocate -l 1G /swapfile
+ls -lh /swapfile
+-rw-r--r-- 1 root root 1.0G Apr 25 11:14 /swapfile
+sudo chmod 600 /swapfile
+ls -lh /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo swapon --show
+free -h
+cat /proc/sys/vm/swappiness
+
+sudo passwd <The password>
+sudo nano /etc/ssh/sshd_config
+PermitRootLogin yes
+PasswordAuthentication yes
+service sshd reload
+
+
+
+
+free -m
+free -h
+sudo rm -rf /tmp/*
+sync; echo 1 > /proc/sys/vm/drop_caches
+sync; echo 2 > /proc/sys/vm/drop_caches
+sync; echo 3 > /proc/sys/vm/drop_caches
+swapoff -a && swapon -a
+echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'
+su -c "echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'" root
+free -h
+sudo ufw disable
+sudo /etc/init.d/apache2 restart
+After that restart the Apache server via:
+UPDATE mysql.user SET Password=PASSWORD('5KbwNf6Eq') WHERE User='root';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '5KbwNf6Eq';
+sudo passwd root
+sudo nano /etc/apache2/conf.d/phpmyadmin.conf
+
+
+
+
+
