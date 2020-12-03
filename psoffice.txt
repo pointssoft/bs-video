@@ -1,1 +1,14 @@
-h
+# service apache2 restart
+need install php extension
+# sudo apt install openssl php-mysql php-tokenizer php-xml php-json php-common php-bcmath php-zip php-curl php-mbstring php-gettext php*-mcrypt
+#sudo phpenmod php-curl
+# sudo apt-get install phpmyadmin  ClVY7J4ox C1VY7J4ox ClVY7J4ox 
+# sudo nano /etc/phpmyadmin/apache.conf
+add new line on the file 
+Alias /psdb /usr/share/phpmyadmin
+CREATE DATABASE email;
+SHOW DATABASES;
+USE email;
+update mysql.user set authentication_string=password('uJ13hy8D') where user='root' and Host ='localhost';
+update mysql.user set plugin="mysql_native_password"; 
+flush privileges;
